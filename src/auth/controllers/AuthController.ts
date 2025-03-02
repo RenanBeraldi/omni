@@ -1,11 +1,12 @@
 import { Controller, Post, Body } from "@nestjs/common";
+import { AuthService } from "../services/AuthService";
 
-@Controller("authorize")
+@Controller("users")
 export class AuthController {
-    constructor() {}
+    constructor(private readonly authService: AuthService) {}
 
-    @Post("/users/signin")
-    public authorizeUserSignin(@Body() data: any): any {
-        return;
+    @Post("signin")
+    async signin(@Body() body: { username: string; password: string }) {
+        return this.authService.signin(body.username, body.password);
     }
 }
