@@ -1,12 +1,10 @@
 export class ResponseBuilder {
     constructor() {}
 
-    public success(message: string): any {
+    public success(data: any): any {
         return {
             statusCode: 200,
-            body: {
-                message: message,
-            },
+            body: { data },
         };
     }
 
@@ -14,15 +12,6 @@ export class ResponseBuilder {
         return {
             statusCode: 201,
             body: responsePayload,
-        };
-    }
-
-    public badRequest(message: string): any {
-        return {
-            statusCode: 400,
-            body: {
-                error: message,
-            },
         };
     }
 
