@@ -5,6 +5,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UsersModule } from "./users/modules/UsersModule";
 import { AuthModule } from "./auth/modules/AuthModule";
 import { TransactionsModule } from "./transactions/modules/TransactionsModule";
+import { User } from "./entities/User";
+import { Transaction } from "./entities/Transaction";
 
 @Module({
     imports: [
@@ -16,6 +18,8 @@ import { TransactionsModule } from "./transactions/modules/TransactionsModule";
             password: "Regis22041980!",
             database: "omni",
             autoLoadEntities: true,
+            entities: [User, Transaction],
+            synchronize: true,
         }),
         UsersModule,
         AuthModule,
