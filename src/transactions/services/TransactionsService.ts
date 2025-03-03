@@ -21,7 +21,7 @@ export class TransactionsService {
      *
      * @return {Promise<void> | any}
      */
-    async transferMoney(
+    public async transferMoney(
         fromId: string,
         toId: string,
         amount: number,
