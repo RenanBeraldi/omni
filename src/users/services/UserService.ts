@@ -1,6 +1,5 @@
 import { Injectable, ConflictException } from "@nestjs/common";
 import { UserRepository } from "../repositories/UserRepository";
-import * as bcrypt from "bcrypt";
 import { ResponseBuilder } from "src/common/utils/ResponseBuilder";
 
 @Injectable()
@@ -32,18 +31,23 @@ export class UserService {
             );
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         const newUser = await this.userRepo.createUser(
             username,
-            hashedPassword,
+            password,
             birthdate,
         );
 
         return this.responseBuilder.created({ id: newUser.id });
     }
 
+    /**
+     * This method makes a request to the DB to bring a list of all the registered users
+     *
+     * @return {any} A Standardized success response, with status code and the Users list
+     */
     async findAllUsers() {
-        return this.userRepo.findAll();
+        const users = await this.userRepo.findAll();
+
+        return this.responseBuilder.success(users);
     }
 }

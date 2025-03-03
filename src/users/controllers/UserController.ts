@@ -14,6 +14,7 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get()
+    @HttpCode(200)
     @UseGuards(AuthGuard("jwt"))
     async getUsers() {
         return this.userService.findAllUsers();
