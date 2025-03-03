@@ -1,4 +1,11 @@
-import { Controller, Post, Get, Body, UseGuards } from "@nestjs/common";
+import {
+    Controller,
+    Post,
+    Get,
+    Body,
+    UseGuards,
+    HttpCode,
+} from "@nestjs/common";
 import { UserService } from "../services/UserService";
 import { AuthGuard } from "@nestjs/passport";
 
@@ -13,6 +20,7 @@ export class UserController {
     }
 
     @Post("signup")
+    @HttpCode(201)
     async signup(
         @Body() body: { username: string; password: string; birthdate: string },
     ) {
