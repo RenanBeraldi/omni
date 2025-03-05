@@ -8,6 +8,7 @@ import {
 } from "@nestjs/common";
 import { UserService } from "../services/UserService";
 import { AuthGuard } from "@nestjs/passport";
+import { SignupDTO } from "../dtos/SignupDTO";
 
 @Controller("users")
 export class UserController {
@@ -22,9 +23,7 @@ export class UserController {
 
     @Post("signup")
     @HttpCode(201)
-    async signup(
-        @Body() body: { username: string; password: string; birthdate: string },
-    ) {
+    async signup(@Body() body: SignupDTO) {
         return this.userService.signup(
             body.username,
             body.password,

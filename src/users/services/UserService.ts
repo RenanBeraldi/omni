@@ -6,7 +6,7 @@ import { ResponseBuilder } from "src/common/utils/ResponseBuilder";
 export class UserService {
     private responseBuilder: ResponseBuilder;
 
-    constructor(private readonly userRepo: UserRepository) {
+    constructor(private readonly userRepository: UserRepository) {
         this.responseBuilder = new ResponseBuilder();
     }
 
@@ -23,7 +23,7 @@ export class UserService {
      */
     public async signup(username: string, password: string, birthdate: string) {
         // Verifies if already has a user with the username
-        const existingUser = await this.userRepo.findByUsername(username);
+        const existingUser = await this.userRepository.findByUsername(username);
 
         if (existingUser) {
             throw new ConflictException(
@@ -31,7 +31,7 @@ export class UserService {
             );
         }
 
-        const newUser = await this.userRepo.createUser(
+        const newUser = await this.userRepository.createUser(
             username,
             password,
             birthdate,
@@ -45,8 +45,8 @@ export class UserService {
      *
      * @return {any} A Standardized success response, with status code and the Users list
      */
-    async findAllUsers() {
-        const users = await this.userRepo.findAll();
+    public async findAllUsers() {
+        const users = await this.userRepository.findAll();
 
         return this.responseBuilder.success(users);
     }

@@ -15,7 +15,7 @@ import { Transaction } from "./entities/Transaction";
             host: "localhost",
             port: 5432,
             username: "postgres",
-            password: "Regis22041980!",
+            password: "",
             database: "omni",
             autoLoadEntities: true,
             entities: [User, Transaction],
